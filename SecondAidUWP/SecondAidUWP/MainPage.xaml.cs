@@ -65,26 +65,35 @@ namespace SecondAidUWP
                         Content = new FormUrlEncodedContent(myParameters)
                     };
                     request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/x-www-form-urlencoded"));
-                    
+
                     //Grab json of token from server
                     HttpResponseMessage response = await client.SendAsync(request);
                     var json = await response.Content.ReadAsStringAsync();
+                    Debug.WriteLine(json);
 
                     //Parse json data
                     dynamic data = JObject.Parse(json);
 
-                    //Save information from json
-                    Config.userToken = data.access_token;
+                    //Save information from json or print error
+                    if (data.error == "invalid_grant")
+                    {
+                        errorMessageText.Text = data.error_description;
+                    }
+                    else
+                    {
+                        Config.userToken = data.access_token;
+                        errorMessageText.Text = "";
+
+                        //Go to ProcedureListPage
+                        this.Frame.Navigate(typeof(ProcedureListPage));
+                    }
                 }
+                
             }
             catch (Exception ex)
             {
                 Debug.WriteLine("Error: " + ex);
             }
-
-
-            
-            
 
         }
     }
