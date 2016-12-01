@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Collections.Generic;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -20,6 +21,7 @@ using System.Diagnostics;
 using System.Net.Http.Headers;
 using Windows.Data.Json;
 using System.Text;
+using Newtonsoft.Json.Linq;
 
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
@@ -42,7 +44,15 @@ namespace SecondAidUWP
             var name = UserNameTextBox.Text;
             var password = PasswordTextBox.Password;
             var url = Config.connectTokenUrl;
-            string myParameters = "userName=" + name + "&password=" + password + "&grant_type=password";
+            
+            //Set parameters for http request
+            List<KeyValuePair<string,string>> myParameters = new List<KeyValuePair<string, string>>()
+            {
+                new KeyValuePair<string, string>("username", name),
+                new KeyValuePair<string, string>("password", password),
+                new KeyValuePair<string, string>("grant_type", "password")
+            };
+
 
             try
             {
@@ -52,12 +62,19 @@ namespace SecondAidUWP
                     {
                         RequestUri = new Uri(url),
                         Method = HttpMethod.Post,
+                        Content = new FormUrlEncodedContent(myParameters)
                     };
                     request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/x-www-form-urlencoded"));
                     
-                    //grab json from server
-                    var json = await client.SendAsync(request, myParameters);
-                    UserNameTextBox.Text = json.ToString();
+                    //Grab json of token from server
+                    HttpResponseMessage response = await client.SendAsync(request);
+                    var json = await response.Content.ReadAsStringAsync();
+
+                    //Parse json data
+                    dynamic data = JObject.Parse(json);
+
+                    //Save information from json
+                    Config.userToken = data.access_token;
                 }
             }
             catch (Exception ex)

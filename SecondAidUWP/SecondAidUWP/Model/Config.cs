@@ -9,5 +9,6 @@ namespace SecondAidUWP.Model
     class Config
     {
         public static string connectTokenUrl = "http://2aid.azurewebsites.net/connect/token";
+        public static string userToken = "";
     }
 }
