@@ -81,7 +81,7 @@ namespace SecondAidUWP
                     }
                     else
                     {
-                        Config.userToken = data.access_token;
+                        Data.userToken = data.access_token;
                         errorMessageText.Text = "";
 
                         //Go to ProcedureListPage

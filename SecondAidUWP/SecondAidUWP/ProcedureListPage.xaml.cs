@@ -49,7 +49,7 @@ namespace SecondAidUWP
                     request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/x-www-form-urlencoded"));
 
                     //Add Token
-                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Config.userToken);
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Data.userToken);
 
                     //Grab json of token from server
                     HttpResponseMessage response = await client.SendAsync(request);
@@ -63,6 +63,13 @@ namespace SecondAidUWP
                     {
                         Debug.WriteLine(item.ToString());
                         numberOfProcedures += 1;
+
+                        Procedure tempProcedure = new Procedure();
+                        tempProcedure.setProcedureId((int)item["procedureId"]);
+                        tempProcedure.setName((string)item["name"]);
+                        tempProcedure.setDescription((string)item["description"]);
+
+                        Data.procedures.Add(tempProcedure);
                     }
 
                     TextBlock[] procedureId = new TextBlock[numberOfProcedures];
@@ -94,7 +101,6 @@ namespace SecondAidUWP
                         mainGrid.Children.Add(name[i]);
                         Grid.SetRow(description[i], gridCount++);
                         mainGrid.Children.Add(description[i]);
-
 
                         i++;
                     }

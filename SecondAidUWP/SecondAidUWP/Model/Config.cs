@@ -16,7 +16,5 @@ namespace SecondAidUWP.Model
         public static MainPage MainPage;
         public static ProcedureListPage ProcedureListPage;
 
-        //Tokens
-        public static string userToken = "";
     }
 }
