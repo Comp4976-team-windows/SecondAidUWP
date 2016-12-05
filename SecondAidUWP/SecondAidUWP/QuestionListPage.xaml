@@ -1,0 +1,22 @@
+﻿<Page
+    x:Class="SecondAidUWP.QuestionListPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SecondAidUWP"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <TextBlock x:Name="questionnaireNameTextBlock" HorizontalAlignment="Left" Margin="416,88,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="58" Width="490"/>
+        <TextBlock x:Name="questionNumberLabel" HorizontalAlignment="Left" Margin="416,151,0,0" TextWrapping="Wrap" Text="Question Number:" VerticalAlignment="Top" Height="42" Width="197"/>
+        <TextBox x:Name="questionNumberBox" HorizontalAlignment="Left" Margin="649,151,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="42" Width="80" IsReadOnly="True"/>
+        <TextBlock x:Name="questionLabel" HorizontalAlignment="Left" Margin="416,225,0,0" TextWrapping="Wrap" Text="Question:" VerticalAlignment="Top" Height="42" Width="197"/>
+        <TextBox x:Name="questionTextBox" HorizontalAlignment="Left" Height="201" Margin="416,272,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="490" IsReadOnly="True"/>
+        <TextBlock x:Name="answerLabel" HorizontalAlignment="Left" Margin="416,503,0,0" TextWrapping="Wrap" Text="Answer:" VerticalAlignment="Top" Height="42" Width="85"/>
+        <TextBox x:Name="answerTextBox" HorizontalAlignment="Left" Margin="501,503,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="32" Width="405"/>
+        <Button x:Name="previousButton" Content="Previous" HorizontalAlignment="Left" Margin="315,503,0,0" VerticalAlignment="Top" Click="previousButton_Click"/>
+        <Button x:Name="nextButton" Content="Next" HorizontalAlignment="Left" Margin="948,503,0,0" VerticalAlignment="Top" Height="32" Width="77" Click="nextButton_Click"/>
+
+    </Grid>
+</Page>
