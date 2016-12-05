@@ -17,7 +17,7 @@ namespace SecondAidUWP.Model
         public static string PreInstructionApiUrl = "http://2aid.azurewebsites.net/api/preinstructione";
         public static string scheduleApiUrl = "http://2aid.azurewebsites.net/api/schedules";
         public static string medicationInstruction = "http://2aid.azurewebsites.net/api/medicationinstructions";
-        public static string medication = "http://2aid.azurewebsites.net/api/medications";
+        public static string medicationApiUrl = "http://2aid.azurewebsites.net/api/medications";
 
     }
 }

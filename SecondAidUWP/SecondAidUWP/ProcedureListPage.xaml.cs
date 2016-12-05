@@ -148,6 +148,7 @@ namespace SecondAidUWP
         {
             Procedure obj = ((FrameworkElement)sender).DataContext as Procedure;
             Debug.WriteLine(obj.procedureId);
+            this.Frame.Navigate(typeof(MedicationPage));
         }
 
         private void PreInstructionButton_Click(object sender, RoutedEventArgs e)
