@@ -8,9 +8,10 @@ namespace SecondAidUWP.Model
 {
     class Procedure
     {
-        private int procedureId;
-        private string name;
-        private string description;
+        
+        public int procedureId;
+        public string name;
+        public string description;
 
         public int getProcedureId()
         {
@@ -41,6 +42,12 @@ namespace SecondAidUWP.Model
         {
             this.description = description;
         }
+
+        /*
+        public int procedureId { get; set; }
+        public string name { get; set; }
+        public string description { get; set; }
+        */
 
     }
 }

@@ -5,10 +5,60 @@
     xmlns:local="using:SecondAidUWP"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:data="using:SecondAidUWP.Model"
     mc:Ignorable="d">
 
-    <ScrollViewer>
+    <!--<ScrollViewer>
         <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Name="mainGrid" />
     </ScrollViewer>
+    -->
+
+    <Grid Padding="20" >
+        <Grid.Background>
+            <!--<ImageBrush ImageSource ="/Assets/mik.jpg" Stretch="None"></ImageBrush>-->
+            <LinearGradientBrush>
+                <GradientStop Color="LightBlue" Offset="0"/>
+                <GradientStop Color="LightGreen" Offset="2"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+
+        <GridView x:Name="procedureView" HorizontalAlignment="Center" Padding="20" IsItemClickEnabled="True">
+            <GridView.ItemContainerStyle>
+                <Style TargetType="GridViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                    <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                    <Setter Property="VerticalAlignment" Value="Stretch"/>
+                    <Setter Property="Margin" Value="30"/>
+                </Style>
+            </GridView.ItemContainerStyle>
+
+            <GridView.ItemTemplate>
+                <DataTemplate x:DataType="data:Procedure">
+                    <StackPanel Background="AliceBlue"
+                                Padding="50">
+
+                        <StackPanel HorizontalAlignment="Left" Padding="5">
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock FontSize="20" Text="Prucedure Name: " FontWeight="Bold"/>
+                                <TextBlock FontSize="20" Text="{x:Bind name}" HorizontalAlignment="Left" TextWrapping="Wrap" />
+                            </StackPanel>
+
+                            <StackPanel Orientation="Vertical" Margin="0,20,0,0">
+                                <TextBlock FontSize="20" Text="Description: " FontWeight="Bold"/>
+                                <TextBlock FontSize="20" Text="{x:Bind description}" HorizontalAlignment="Left" TextWrapping="Wrap" />
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
+                                <Button x:Name="MedicationButton" Content="Medication" Click="MedicationButton_Click" Margin="0,20,20,0" FontSize="20" />
+                                <Button x:Name="PreInstructionButton" Content="Pre-Instruction" Click="PreInstructionButton_Click" Margin="0,20,20,0" FontSize="20" />
+                                <Button x:Name="SurveyButton" Content="Survey" Click="SurveyButton_Click" Margin="0,20,20,0" FontSize="20" />
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+                </DataTemplate>
+            </GridView.ItemTemplate>
+        </GridView>
+    </Grid>
 
 </Page>
