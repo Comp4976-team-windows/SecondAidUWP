@@ -53,6 +53,7 @@
                                 <Button x:Name="MedicationButton" Content="Medication" Click="MedicationButton_Click" Margin="0,20,20,0" FontSize="20" />
                                 <Button x:Name="PreInstructionButton" Content="Pre-Instruction" Click="PreInstructionButton_Click" Margin="0,20,20,0" FontSize="20" />
                                 <Button x:Name="SurveyButton" Content="Survey" Click="SurveyButton_Click" Margin="0,20,20,0" FontSize="20" />
+                                <Button x:Name="SubProcedureButton" Content="Sub-Procedure" Click="SubProcedureButton_Click" Margin="0,20,20,0" FontSize="20" />
                             </StackPanel>
                         </StackPanel>
                     </StackPanel>

@@ -161,5 +161,11 @@ namespace SecondAidUWP
             Procedure obj = ((FrameworkElement)sender).DataContext as Procedure;
             Debug.WriteLine(obj.procedureId);
         }
+
+        private void SubProcedureButton_Click(object sender, RoutedEventArgs e)
+        {
+            Procedure obj = ((FrameworkElement)sender).DataContext as Procedure;
+            Debug.WriteLine(obj.procedureId);
+        }
     }
 }
