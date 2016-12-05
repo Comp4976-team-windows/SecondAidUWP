@@ -17,6 +17,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using SecondAidUWP.Model;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -28,11 +29,13 @@ namespace SecondAidUWP
     public sealed partial class ProcedureListPage : Page
     {
         private int numberOfProcedures;
+        private List<Procedure> Procedures = new List<Procedure>();
 
         public ProcedureListPage()
         {
             this.InitializeComponent();
             getProcedures();
+            UpdateLayout();
         }
 
         public async void getProcedures()
@@ -61,26 +64,51 @@ namespace SecondAidUWP
 
                     foreach (JObject item in data)
                     {
-                        Debug.WriteLine(item.ToString());
-                        numberOfProcedures += 1;
+                        //Debug.WriteLine(item.ToString());
+                        //numberOfProcedures += 1;
 
+                        
                         Procedure tempProcedure = new Procedure();
                         tempProcedure.setProcedureId((int)item["procedureId"]);
                         tempProcedure.setName((string)item["name"]);
                         tempProcedure.setDescription((string)item["description"]);
 
-                        Data.procedures.Add(tempProcedure);
-                    }
+                        //Data.procedures.Add(tempProcedure);
+                        
 
+                        Procedures.Add(tempProcedure);
+
+                        /*foreach (Procedure i in Procedures)
+                        {
+                            Debug.WriteLine(i.procedureId);
+                            Debug.WriteLine(i.name);
+                            Debug.WriteLine(i.description);
+                        }*/
+                        
+                    }
+                    procedureView.ItemsSource = Procedures;
+                    /*
                     TextBlock[] procedureId = new TextBlock[numberOfProcedures];
                     TextBlock[] name = new TextBlock[numberOfProcedures];
                     TextBlock[] description = new TextBlock[numberOfProcedures];
                     int i = 0;
                     int gridCount = 1;
+                    */
 
                     //RowDefinition rowDef = new RowDefinition();
                     //rowDef.Height = new GridLength(100);
 
+
+
+
+
+
+
+
+
+
+
+                    /*
                     foreach (JObject item in data)
                     {
 
@@ -104,6 +132,7 @@ namespace SecondAidUWP
 
                         i++;
                     }
+                    */
 
                 }
 
@@ -113,6 +142,30 @@ namespace SecondAidUWP
                 Debug.WriteLine("Error: " + ex);
             }
 
+        }
+
+        private void MedicationButton_Click(object sender, RoutedEventArgs e)
+        {
+            Procedure obj = ((FrameworkElement)sender).DataContext as Procedure;
+            Debug.WriteLine(obj.procedureId);
+        }
+
+        private void PreInstructionButton_Click(object sender, RoutedEventArgs e)
+        {
+            Procedure obj = ((FrameworkElement)sender).DataContext as Procedure;
+            Debug.WriteLine(obj.procedureId);
+        }
+
+        private void SurveyButton_Click(object sender, RoutedEventArgs e)
+        {
+            Procedure obj = ((FrameworkElement)sender).DataContext as Procedure;
+            Debug.WriteLine(obj.procedureId);
+        }
+
+        private void SubProcedureButton_Click(object sender, RoutedEventArgs e)
+        {
+            Procedure obj = ((FrameworkElement)sender).DataContext as Procedure;
+            Debug.WriteLine(obj.procedureId);
         }
     }
 }
