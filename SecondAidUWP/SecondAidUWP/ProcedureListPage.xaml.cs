@@ -155,6 +155,7 @@ namespace SecondAidUWP
         {
             Procedure obj = ((FrameworkElement)sender).DataContext as Procedure;
             Debug.WriteLine(obj.procedureId);
+            this.Frame.Navigate(typeof(PreInstructionPage));
         }
 
         private void SurveyButton_Click(object sender, RoutedEventArgs e)
