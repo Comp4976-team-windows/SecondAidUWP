@@ -6,16 +6,15 @@ using System.Threading.Tasks;
 
 namespace SecondAidUWP.Model
 {
-    class Procedure
+    class Medication
     {
-        
-        public int procedureId;
+        public int medicationId;
         public string name;
         public string description;
 
-        public int getProcedureId()
+        public int getMedicationId()
         {
-            return procedureId;
+            return medicationId;
         }
 
         public string getName()
@@ -28,9 +27,9 @@ namespace SecondAidUWP.Model
             return description;
         }
 
-        public void setProcedureId(int procedureId)
+        public void setMedicationId(int medicationId)
         {
-            this.procedureId = procedureId;
+            this.medicationId = medicationId;
         }
 
         public void setName(string name)
@@ -42,12 +41,5 @@ namespace SecondAidUWP.Model
         {
             this.description = description;
         }
-
-        /*
-        public int procedureId { get; set; }
-        public string name { get; set; }
-        public string description { get; set; }
-        */
-
     }
 }
