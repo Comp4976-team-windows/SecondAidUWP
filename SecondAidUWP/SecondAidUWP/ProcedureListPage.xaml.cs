@@ -153,6 +153,7 @@ namespace SecondAidUWP
         {
             Schedule obj = ((FrameworkElement)sender).DataContext as Schedule;
             Debug.WriteLine(obj.prodecure.procedureId);
+            this.Frame.Navigate(typeof(PreInstructionPage));
         }
 
         private void SurveyButton_Click(object sender, RoutedEventArgs e)
