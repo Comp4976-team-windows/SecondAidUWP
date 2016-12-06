@@ -15,7 +15,6 @@
 
     <Grid Padding="20" >
         <Grid.Background>
-            <!--<ImageBrush ImageSource ="/Assets/mik.jpg" Stretch="None"></ImageBrush>-->
             <LinearGradientBrush>
                 <GradientStop Color="LightBlue" Offset="0"/>
                 <GradientStop Color="LightGreen" Offset="2"/>

@@ -98,7 +98,7 @@ namespace SecondAidUWP
         public void populateQuestionnaire()
         {
             questionnaireNameTextBlock.Text = questionnaire.getName();
-            questionNumberBox.Text = "" + questionIndex;
+            questionNumberBox.Text = "" + questionIndex + " / " + questionnaire.questions.Count;
             questionTextBox.Text = questionnaire.questions[questionIndex - 1].getQuestionBody();
 
             if(questionnaire.questions[questionIndex - 1].getQuestionAnswer() == null)
@@ -110,6 +110,7 @@ namespace SecondAidUWP
             }
         }
 
+        //Previous Button
         private void previousButton_Click(object sender, RoutedEventArgs e)
         {
             if(questionIndex > 1)
@@ -121,6 +122,7 @@ namespace SecondAidUWP
             }
         }
 
+        //Next Button
         private void nextButton_Click(object sender, RoutedEventArgs e)
         {
             if (questionIndex < questionnaire.questions.Count)

@@ -7,7 +7,14 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <!--Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"-->
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush>
+                <GradientStop Color="LightBlue" Offset="0"/>
+                <GradientStop Color="LightGreen" Offset="2"/>
+            </LinearGradientBrush>
+        </Grid.Background>
         <TextBlock x:Name="questionnaireNameTextBlock" HorizontalAlignment="Left" Margin="416,88,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="58" Width="490"/>
         <TextBlock x:Name="questionNumberLabel" HorizontalAlignment="Left" Margin="416,151,0,0" TextWrapping="Wrap" Text="Question Number:" VerticalAlignment="Top" Height="42" Width="197"/>
         <TextBox x:Name="questionNumberBox" HorizontalAlignment="Left" Margin="649,151,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="42" Width="80" IsReadOnly="True"/>
