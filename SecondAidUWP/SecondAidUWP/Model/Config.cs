@@ -16,7 +16,7 @@ namespace SecondAidUWP.Model
         public static string questionnaireApiUrl = "http://secondaid.azurewebsites.net/api/questionnaires/";
 
         public static string subProcedureApiUrl = "http://secondaid.azurewebsites.net/api/subprocedure";
-        public static string PreInstructionApiUrl = "http://secondaid.azurewebsites.net/api/preinstructione";
+        public static string preInstructionApiUrl = "http://secondaid.azurewebsites.net/api/preinstructione";
 
         //public static string scheduleApiUrl = "http://secondaid.azurewebsites.net/api/schedules";
         public static string scheduleApiUrl = "http://secondaid.azurewebsites.net/api/schedules";
