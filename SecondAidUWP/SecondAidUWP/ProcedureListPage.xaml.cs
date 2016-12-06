@@ -28,8 +28,7 @@ namespace SecondAidUWP
     /// </summary>
     public sealed partial class ProcedureListPage : Page
     {
-        private int numberOfProcedures;
-        private List<Procedure> Procedures = new List<Procedure>();
+        private List<Schedule> schedules = new List<Schedule>();
 
         public ProcedureListPage()
         {
@@ -44,98 +43,97 @@ namespace SecondAidUWP
             {
                 using (var client = new HttpClient())
                 {
-                    var request = new HttpRequestMessage()
+                    // request from ProcedureAPI
+                    var request1 = new HttpRequestMessage()
                     {
                         RequestUri = new Uri(Config.procedureApiUrl),
                         Method = HttpMethod.Get
                     };
-                    request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/x-www-form-urlencoded"));
+
+                    // request from ScheduleAPI
+                    var request2 = new HttpRequestMessage()
+                    {
+                        RequestUri = new Uri(Config.scheduleApiUrl),
+                        Method = HttpMethod.Get
+                    };
+
+                    // Procedure
+                    request1.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/x-www-form-urlencoded"));
+
+                    // Schedule
+                    request2.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/x-www-form-urlencoded"));
 
                     //Add Token
                     client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Data.userToken);
 
                     //Grab json of token from server
-                    HttpResponseMessage response = await client.SendAsync(request);
-                    var json = await response.Content.ReadAsStringAsync();
-                    Debug.WriteLine(json);
+                    HttpResponseMessage response1 = await client.SendAsync(request1);
+                    HttpResponseMessage response2 = await client.SendAsync(request2);
+
+                    var json1 = await response1.Content.ReadAsStringAsync();
+                    var json2 = await response2.Content.ReadAsStringAsync();
+
+                    // Debug.WriteLine(json2);
 
                     //Parse json data
-                    dynamic data = JArray.Parse(json);
+                    dynamic ProcedureData = JArray.Parse(json1);
+                    dynamic ScheduleData = JArray.Parse(json2);
 
-                    foreach (JObject item in data)
+                    // outer foreach START
+                    foreach (JObject item in ScheduleData)
                     {
                         //Debug.WriteLine(item.ToString());
-                        //numberOfProcedures += 1;
 
-                        
+                        Schedule tempSchedule = new Schedule();
                         Procedure tempProcedure = new Procedure();
-                        tempProcedure.setProcedureId((int)item["procedureId"]);
-                        tempProcedure.setName((string)item["name"]);
-                        tempProcedure.setDescription((string)item["description"]);
 
-                        //Data.procedures.Add(tempProcedure);
-                        
+                        //Debug.WriteLine((string)item["patientId"]);
+                        //Debug.WriteLine((int)item["procedureId"]);
+                        //Debug.WriteLine((Boolean)item["isCompleted"]);
+                        //Debug.WriteLine((DateTime)item["time"]);
 
-                        Procedures.Add(tempProcedure);
+                        tempSchedule.patientId = ((string)item["patientId"]);
+                        tempSchedule.procedureId = ((int)item["procedureId"]);
+                        tempSchedule.isCompleted = ((Boolean)item["isCompleted"]);
+                        tempSchedule.procedureDate = (DateTime)item["time"];
 
-                        /*foreach (Procedure i in Procedures)
+                        // inner foreach START
+                        foreach (JObject i in ProcedureData)
                         {
-                            Debug.WriteLine(i.procedureId);
-                            Debug.WriteLine(i.name);
-                            Debug.WriteLine(i.description);
-                        }*/
+                            if ((int)i["procedureId"] == (int)item["procedureId"])
+                            {
+                                tempProcedure.setProcedureId((int)i["procedureId"]);
+                                tempProcedure.setName((string)i["name"]);
+                                tempProcedure.setDescription((string)i["description"]);
+                                tempSchedule.prodecure = tempProcedure;
+                            }
+                        }// inner foreach END
+
+                        if (tempSchedule.isCompleted == true)
+                        {
+                            // Add schedule to the List<Schedule>
+                            schedules.Add(tempSchedule);
+                        }else
+                        {
+                            TextBlock textBlock = new TextBlock();
+                            textBlock.Text = "No schedules are set up yet...";
+                            textBlock.FontFamily = new FontFamily("Verdana");
+                            textBlock.FontSize = 28;
+                            textBlock.FontWeight = Windows.UI.Text.FontWeights.Bold;
+                            textBlock.FontStyle = Windows.UI.Text.FontStyle.Italic;
+                            textBlock.CharacterSpacing = 200;
+                            //textBlock.Foreground = new SolidColorBrush(Windows.UI.Colors.Blue);
+
+                            // Add the TextBox to the visual tree.
+                            mainGrid.Children.Add(textBlock);
+                        }
                         
-                    }
-                    procedureView.ItemsSource = Procedures;
-                    /*
-                    TextBlock[] procedureId = new TextBlock[numberOfProcedures];
-                    TextBlock[] name = new TextBlock[numberOfProcedures];
-                    TextBlock[] description = new TextBlock[numberOfProcedures];
-                    int i = 0;
-                    int gridCount = 1;
-                    */
 
-                    //RowDefinition rowDef = new RowDefinition();
-                    //rowDef.Height = new GridLength(100);
+                        scheduleView.ItemsSource = schedules;
 
-
-
-
-
-
-
-
-
-
-
-                    /*
-                    foreach (JObject item in data)
-                    {
-
-                        mainGrid.RowDefinitions.Add(new RowDefinition());
-
-                        procedureId[i] = new TextBlock();
-                        procedureId[i].Text = (string)item["procedureId"];
-
-                        name[i] = new TextBlock();
-                        name[i].Text = (string)item["name"];
-
-                        description[i] = new TextBlock();
-                        description[i].Text = (string)item["description"];
-
-                        Grid.SetRow(procedureId[i], gridCount++);
-                        mainGrid.Children.Add(procedureId[i]);
-                        Grid.SetRow(name[i], gridCount++);
-                        mainGrid.Children.Add(name[i]);
-                        Grid.SetRow(description[i], gridCount++);
-                        mainGrid.Children.Add(description[i]);
-
-                        i++;
-                    }
-                    */
+                    }// outer foreach END
 
                 }
-
             }
             catch (Exception ex)
             {
@@ -146,27 +144,27 @@ namespace SecondAidUWP
 
         private void MedicationButton_Click(object sender, RoutedEventArgs e)
         {
-            Procedure obj = ((FrameworkElement)sender).DataContext as Procedure;
-            Debug.WriteLine(obj.procedureId);
+            Schedule obj = ((FrameworkElement)sender).DataContext as Schedule;
+            Debug.WriteLine(obj.prodecure.procedureId);
             this.Frame.Navigate(typeof(MedicationPage));
         }
 
         private void PreInstructionButton_Click(object sender, RoutedEventArgs e)
         {
-            Procedure obj = ((FrameworkElement)sender).DataContext as Procedure;
-            Debug.WriteLine(obj.procedureId);
+            Schedule obj = ((FrameworkElement)sender).DataContext as Schedule;
+            Debug.WriteLine(obj.prodecure.procedureId);
         }
 
         private void SurveyButton_Click(object sender, RoutedEventArgs e)
         {
-            Procedure obj = ((FrameworkElement)sender).DataContext as Procedure;
-            Debug.WriteLine(obj.procedureId);
+            Schedule obj = ((FrameworkElement)sender).DataContext as Schedule;
+            Debug.WriteLine(obj.prodecure.procedureId);
         }
 
         private void SubProcedureButton_Click(object sender, RoutedEventArgs e)
         {
-            Procedure obj = ((FrameworkElement)sender).DataContext as Procedure;
-            Debug.WriteLine(obj.procedureId);
+            Schedule obj = ((FrameworkElement)sender).DataContext as Schedule;
+            Debug.WriteLine(obj.prodecure.procedureId);
         }
     }
 }

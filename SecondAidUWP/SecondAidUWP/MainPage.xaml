@@ -7,6 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
+    <!--
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <TextBox x:Name="UserNameTextBox" HorizontalAlignment="Left" Margin="525,247,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="43" Width="345"/>
         <PasswordBox x:Name="PasswordTextBox" HorizontalAlignment="Left" Margin="525,329,0,0"  VerticalAlignment="Top" Height="43" Width="345"/>
@@ -16,4 +17,42 @@
         <TextBlock x:Name="errorMessageText" HorizontalAlignment="Left" Margin="525,183,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="39" Width="345" Foreground="Red"/>
 
     </Grid>
+    -->
+
+    <Grid>
+        <Grid.Background>
+            <!--<ImageBrush ImageSource ="/Assets/mik.jpg" Stretch="None"></ImageBrush>-->
+            <LinearGradientBrush>
+                <GradientStop Color="LightBlue" Offset="0"/>
+                <GradientStop Color="LightGreen" Offset="2"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Title/Logo -->
+        <StackPanel Width="500" Height="300">
+            <TextBlock Text="Second Aid" FontSize="100" Margin="0,130,0,0" />
+        </StackPanel>
+
+        <!-- login form -->
+        <StackPanel Width="300" Grid.Row="1">
+            <TextBlock x:Name="errorMessageText" TextWrapping="Wrap" Text="" Foreground="Red" />
+
+            <TextBlock x:Name="UserNameTextBlock" Text="Username" FontSize="20" Margin="0,20,0,0" />
+            <TextBox x:Name="UserNameTextBox" MinWidth="300" Width="300"/>
+
+            <TextBlock x:Name="PasswordTextBlock" Text="Password" FontSize="20" Margin="0,20,0,0"/>
+            <PasswordBox x:Name="PasswordTextBox" MinWidth="300" Width="300"/>
+
+            <TextBlock x:Name="ClinicIdTextBlock" Text="Clinic ID" FontSize="20" Margin="0,20,0,0" />
+            <TextBox x:Name="ClinicIdTextBox" MinWidth="300" Width="300" />
+
+            <Button x:Name="LoginButton" Content="Login" Click="LoginButton_Click" Margin="0,20,0,40" FontSize="20" />
+        </StackPanel>
+    </Grid>
+    
 </Page>

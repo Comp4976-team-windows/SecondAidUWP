@@ -10,7 +10,7 @@ namespace SecondAidUWP.Model
     {
         public DateTime procedureDate { set; get; }
         public Boolean isCompleted { set; get; }
-        public int patientId { set; get; }
+        public string patientId { set; get; }
         public int procedureId { set; get; }
 
         public Procedure prodecure { set; get; }
