@@ -133,11 +133,13 @@ namespace SecondAidUWP
                             }
                         }// inner foreach END
 
-                        if (tempSchedule.isCompleted == false)
-                        {
+                        Debug.WriteLine(tempSchedule.isCompleted);
+
+                        //if (!tempSchedule.isCompleted)
+                        //{
                             // Add schedule to the List<Schedule>
                             schedules.Add(tempSchedule);
-                        }else
+                        /*}else
                         {
                             TextBlock textBlock = new TextBlock();
                             textBlock.Text = "No schedules are set up yet...";
@@ -150,14 +152,14 @@ namespace SecondAidUWP
 
                             // Add the TextBox to the visual tree.
                             mainGrid.Children.Add(textBlock);
-                        }
+                        }*/
                         
 
                         scheduleView.ItemsSource = schedules;
 
                     }// outer foreach END
 
-
+                    /*
                     TextBlock clinicNameTextBlock = new TextBlock();
                     TextBlock phoneNumberTextBlock = new TextBlock();
                     StackPanel clinicStackPanel = new StackPanel();
@@ -174,6 +176,7 @@ namespace SecondAidUWP
                     phoneNumberTextBlock.Text = clinic.phoneNumber;
                     phoneNumberTextBlock.FontSize = 20;
                     clinicStackPanel.Children.Add(phoneNumberTextBlock);
+                    */
 
                 }
             }
