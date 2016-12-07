@@ -111,11 +111,6 @@ namespace SecondAidUWP
                         Schedule tempSchedule = new Schedule();
                         Procedure tempProcedure = new Procedure();
 
-                        //Debug.WriteLine((string)item["patientId"]);
-                        //Debug.WriteLine((int)item["procedureId"]);
-                        //Debug.WriteLine((Boolean)item["isCompleted"]);
-                        //Debug.WriteLine((DateTime)item["time"]);
-
                         tempSchedule.patientId = ((string)item["patientId"]);
                         tempSchedule.procedureId = ((int)item["procedureId"]);
                         tempSchedule.isCompleted = ((Boolean)item["isCompleted"]);
@@ -132,14 +127,14 @@ namespace SecondAidUWP
                                 tempSchedule.prodecure = tempProcedure;
                             }
                         }// inner foreach END
+                        
+                        schedules.Add(tempSchedule);
 
-                        Debug.WriteLine(tempSchedule.isCompleted);
-
-                        //if (!tempSchedule.isCompleted)
-                        //{
+                        /*if (!tempSchedule.isCompleted)
+                        {
                             // Add schedule to the List<Schedule>
                             schedules.Add(tempSchedule);
-                        /*}else
+                        }else
                         {
                             TextBlock textBlock = new TextBlock();
                             textBlock.Text = "No schedules are set up yet...";
@@ -148,18 +143,17 @@ namespace SecondAidUWP
                             textBlock.FontWeight = Windows.UI.Text.FontWeights.Bold;
                             textBlock.FontStyle = Windows.UI.Text.FontStyle.Italic;
                             textBlock.CharacterSpacing = 200;
-                            //textBlock.Foreground = new SolidColorBrush(Windows.UI.Colors.Blue);
 
                             // Add the TextBox to the visual tree.
                             mainGrid.Children.Add(textBlock);
                         }*/
-                        
-
-                        scheduleView.ItemsSource = schedules;
 
                     }// outer foreach END
 
-                    /*
+
+                    scheduleView.ItemsSource = schedules;
+
+                    
                     TextBlock clinicNameTextBlock = new TextBlock();
                     TextBlock phoneNumberTextBlock = new TextBlock();
                     StackPanel clinicStackPanel = new StackPanel();
@@ -176,8 +170,6 @@ namespace SecondAidUWP
                     phoneNumberTextBlock.Text = clinic.phoneNumber;
                     phoneNumberTextBlock.FontSize = 20;
                     clinicStackPanel.Children.Add(phoneNumberTextBlock);
-                    */
-
                 }
             }
             catch (Exception ex)
@@ -199,6 +191,13 @@ namespace SecondAidUWP
             Schedule obj = ((FrameworkElement)sender).DataContext as Schedule;
             Debug.WriteLine(obj.prodecure.procedureId);
             this.Frame.Navigate(typeof(PreInstructionPage));
+        }
+
+        private void SubProceduresButton_Click(object sender, RoutedEventArgs e)
+        {
+            Schedule obj = ((FrameworkElement)sender).DataContext as Schedule;
+            Data.procedureId = obj.prodecure.procedureId;
+            this.Frame.Navigate(typeof(SubProceduresPage));
         }
     }
 }
