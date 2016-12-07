@@ -24,5 +24,7 @@ namespace SecondAidUWP.Model
         public static string medicationInstruction = "http://secondaid.azurewebsites.net/api/medicationinstructions";
         public static string medicationApiUrl = "http://secondaid.azurewebsites.net/api/medications";
 
+        public static string clinicApiUrl = "http://secondaid.azurewebsites.net/api/clinics";
+
     }
 }

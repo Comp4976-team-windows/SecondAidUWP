@@ -35,7 +35,8 @@
             <GridView.ItemTemplate>
                 <DataTemplate x:DataType="data:Schedule">
                     <StackPanel Background="AliceBlue"
-                                Padding="50">
+                                Padding="50"
+                                Margin="0,20,0,0">
 
                         <StackPanel HorizontalAlignment="Left" Padding="5">
                             <StackPanel Orientation="Vertical">
@@ -56,8 +57,6 @@
                             <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
                                 <Button x:Name="MedicationButton" Content="Medication" Click="MedicationButton_Click" Margin="0,20,20,0" FontSize="20" />
                                 <Button x:Name="PreInstructionButton" Content="Pre-Instruction" Click="PreInstructionButton_Click" Margin="0,20,20,0" FontSize="20" />
-                                <Button x:Name="SurveyButton" Content="Survey" Click="SurveyButton_Click" Margin="0,20,20,0" FontSize="20" />
-                                <Button x:Name="SubProcedureButton" Content="Sub-Procedure" Click="SubProcedureButton_Click" Margin="0,20,20,0" FontSize="20" />
                             </StackPanel>
                         </StackPanel>
                         

@@ -29,6 +29,7 @@ namespace SecondAidUWP
     public sealed partial class ProcedureListPage : Page
     {
         private List<Schedule> schedules = new List<Schedule>();
+        Clinic clinic = new Clinic();
 
         public ProcedureListPage()
         {
@@ -57,11 +58,21 @@ namespace SecondAidUWP
                         Method = HttpMethod.Get
                     };
 
+                    // request from ClinicAPI
+                    var request3 = new HttpRequestMessage()
+                    {
+                        RequestUri = new Uri(Config.clinicApiUrl),
+                        Method = HttpMethod.Get
+                    };
+
                     // Procedure
                     request1.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/x-www-form-urlencoded"));
 
                     // Schedule
                     request2.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/x-www-form-urlencoded"));
+
+                    // Clinic
+                    request3.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/x-www-form-urlencoded"));
 
                     //Add Token
                     client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Data.userToken);
@@ -69,15 +80,28 @@ namespace SecondAidUWP
                     //Grab json of token from server
                     HttpResponseMessage response1 = await client.SendAsync(request1);
                     HttpResponseMessage response2 = await client.SendAsync(request2);
+                    HttpResponseMessage response3 = await client.SendAsync(request3);
 
                     var json1 = await response1.Content.ReadAsStringAsync();
                     var json2 = await response2.Content.ReadAsStringAsync();
+                    var json3 = await response3.Content.ReadAsStringAsync();
 
                     // Debug.WriteLine(json2);
 
                     //Parse json data
                     dynamic ProcedureData = JArray.Parse(json1);
                     dynamic ScheduleData = JArray.Parse(json2);
+                    dynamic ClinicData = JArray.Parse(json3);
+
+                    foreach (JObject c in ClinicData)
+                    {
+                        if ((int)c["clinicId"] == Data.clinicId)
+                        {
+                            clinic.clinicId = (int)c["clinicId"];
+                            clinic.clinicName = (string)c["clinicName"];
+                            clinic.phoneNumber = (string)c["phoneNumber"];
+                        }
+                    }
 
                     // outer foreach START
                     foreach (JObject item in ScheduleData)
@@ -133,6 +157,24 @@ namespace SecondAidUWP
 
                     }// outer foreach END
 
+
+                    TextBlock clinicNameTextBlock = new TextBlock();
+                    TextBlock phoneNumberTextBlock = new TextBlock();
+                    StackPanel clinicStackPanel = new StackPanel();
+
+                    clinicStackPanel.VerticalAlignment = VerticalAlignment.Top;
+                    clinicStackPanel.HorizontalAlignment = HorizontalAlignment.Stretch;
+                    clinicStackPanel.Background = new SolidColorBrush(Windows.UI.Colors.AliceBlue);
+                    mainGrid.Children.Add(clinicStackPanel);
+
+                    clinicNameTextBlock.Text = clinic.clinicName;
+                    clinicNameTextBlock.FontSize = 20;
+                    clinicStackPanel.Children.Add(clinicNameTextBlock);
+
+                    phoneNumberTextBlock.Text = clinic.phoneNumber;
+                    phoneNumberTextBlock.FontSize = 20;
+                    clinicStackPanel.Children.Add(phoneNumberTextBlock);
+
                 }
             }
             catch (Exception ex)
@@ -154,18 +196,6 @@ namespace SecondAidUWP
             Schedule obj = ((FrameworkElement)sender).DataContext as Schedule;
             Debug.WriteLine(obj.prodecure.procedureId);
             this.Frame.Navigate(typeof(PreInstructionPage));
-        }
-
-        private void SurveyButton_Click(object sender, RoutedEventArgs e)
-        {
-            Schedule obj = ((FrameworkElement)sender).DataContext as Schedule;
-            Debug.WriteLine(obj.prodecure.procedureId);
-        }
-
-        private void SubProcedureButton_Click(object sender, RoutedEventArgs e)
-        {
-            Schedule obj = ((FrameworkElement)sender).DataContext as Schedule;
-            Debug.WriteLine(obj.prodecure.procedureId);
         }
     }
 }
