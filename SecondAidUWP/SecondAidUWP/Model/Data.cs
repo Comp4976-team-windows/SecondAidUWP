@@ -15,6 +15,8 @@ namespace SecondAidUWP.Model
 
         public static int procedureId;
 
+        public static int subProcedureId;
+
         //Lists
         public static List<Procedure> procedures = new List<Procedure>();
     }

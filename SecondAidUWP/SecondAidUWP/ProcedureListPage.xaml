@@ -45,7 +45,7 @@
                             </StackPanel>
 
                             <StackPanel Orientation="Vertical" Margin="0,20,0,0">
-                                <TextBlock FontSize="20" Text="Prucedure Name: " FontWeight="Bold"/>
+                                <TextBlock FontSize="20" Text="Procedure Name: " FontWeight="Bold"/>
                                 <TextBlock FontSize="20" Text="{x:Bind prodecure.name}" HorizontalAlignment="Left" TextWrapping="Wrap" />
                             </StackPanel>
 
@@ -56,7 +56,6 @@
 
                             <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
                                 <Button x:Name="MedicationButton" Content="Medication" Click="MedicationButton_Click" Margin="0,20,20,0" FontSize="20" />
-                                <Button x:Name="PreInstructionButton" Content="Pre-Instruction" Click="PreInstructionButton_Click" Margin="0,20,20,0" FontSize="20" />
                                 <Button x:Name="SubProceduresButton" Content="View SubProcedures" Click="SubProceduresButton_Click" Margin="0,20,20,0" FontSize="20" />
                             </StackPanel>
                         </StackPanel>

@@ -88,5 +88,11 @@ namespace SecondAidUWP
         {
             this.Frame.Navigate(typeof(ProcedureListPage));
         }
+        private void PreInstructionButton_Click(object sender, RoutedEventArgs e)
+        {
+            SubProcedure obj = ((FrameworkElement)sender).DataContext as SubProcedure;
+            Data.subProcedureId = obj.subProcedureId;
+            this.Frame.Navigate(typeof(PreInstructionPage));
+        }
     }
 }

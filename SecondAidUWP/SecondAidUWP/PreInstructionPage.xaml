@@ -8,7 +8,7 @@
     xmlns:data="using:SecondAidUWP.Model"
     mc:Ignorable="d">
 
-    <Grid Padding="20" Margin="0,0,-2310,-3767" >
+    <Grid Padding="20">
         <Grid.Background>
             <LinearGradientBrush>
                 <GradientStop Color="LightBlue" Offset="0"/>

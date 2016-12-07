@@ -59,17 +59,40 @@ namespace SecondAidUWP
                     //Parse json data
                     dynamic data = JArray.Parse(json);
 
+                    var request2 = new HttpRequestMessage()
+                    {
+                        RequestUri = new Uri(Config.medicationInstructionApiUrl),
+                        Method = HttpMethod.Get
+                    };
+                    request2.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/x-www-form-urlencoded"));
+
+                    //Grab json from server
+                    HttpResponseMessage response2 = await client.SendAsync(request2);
+                    var json2 = await response2.Content.ReadAsStringAsync();
+                    Debug.WriteLine(json2);
+
+                    //Parse json data
+                    dynamic data2 = JArray.Parse(json2);
+
                     foreach (JObject item in data)
                     {
                         Medication newMed = new Medication();
                         newMed.setMedicationId((int)item["medicationId"]);
                         newMed.setName((string)item["name"]);
                         newMed.setDescription((string)item["description"]);
-                        MedicationList.Add(newMed);
+                            foreach (JObject stuff in data2)
+                            {
+                                if (((int)stuff["medicationId"] == newMed.getMedicationId()))
+                                {
+                                    newMed.setMedInstruction((string)stuff["instruction"]);
+                                string test = newMed.getMedInstruction();
+                                Debug.WriteLine(test);
+                            }
+                            }
+                            MedicationList.Add(newMed);
+                        }
+                        medicationView.ItemsSource = MedicationList;
                     }
-                    medicationView.ItemsSource = MedicationList;
-                }
-
             }
             catch (Exception ex)
             {

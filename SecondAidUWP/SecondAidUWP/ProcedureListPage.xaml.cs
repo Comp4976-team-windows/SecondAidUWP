@@ -186,13 +186,6 @@ namespace SecondAidUWP
             this.Frame.Navigate(typeof(MedicationPage));
         }
 
-        private void PreInstructionButton_Click(object sender, RoutedEventArgs e)
-        {
-            Schedule obj = ((FrameworkElement)sender).DataContext as Schedule;
-            Debug.WriteLine(obj.prodecure.procedureId);
-            this.Frame.Navigate(typeof(PreInstructionPage));
-        }
-
         private void SubProceduresButton_Click(object sender, RoutedEventArgs e)
         {
             Schedule obj = ((FrameworkElement)sender).DataContext as Schedule;

@@ -11,6 +11,7 @@ namespace SecondAidUWP.Model
         public int medicationId;
         public string name;
         public string description;
+        public string medInstruction;
 
         public int getMedicationId()
         {
@@ -40,6 +41,16 @@ namespace SecondAidUWP.Model
         public void setDescription(string description)
         {
             this.description = description;
+        }
+
+        public string getMedInstruction()
+        {
+            return medInstruction;
+        }
+
+        public void setMedInstruction(string medInstruction)
+        {
+            this.medInstruction = medInstruction;
         }
     }
 }

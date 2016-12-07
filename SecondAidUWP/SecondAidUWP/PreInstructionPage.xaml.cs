@@ -47,7 +47,6 @@ namespace SecondAidUWP
                         Method = HttpMethod.Get
                     };
                     request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/x-www-form-urlencoded"));
-                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Data.userToken);
 
                     //Grab json from server
                     HttpResponseMessage response = await client.SendAsync(request);
@@ -59,11 +58,14 @@ namespace SecondAidUWP
 
                     foreach (JObject item in data)
                     {
-                        PreInstruction newPreInstruction = new PreInstruction();
-                        newPreInstruction.setPreInstructionId((int)item["preInstructionId"]);
-                        newPreInstruction.setTitle((string)item["title"]);
-                        newPreInstruction.setDescription((string)item["description"]);
-                        PreInstructionList.Add(newPreInstruction);
+                        if ((int)item["subProcedureId"] == Data.subProcedureId)
+                        {
+                            PreInstruction newPreInstruction = new PreInstruction();
+                            newPreInstruction.setPreInstructionId((int)item["preInstructionId"]);
+                            newPreInstruction.setTitle((string)item["title"]);
+                            newPreInstruction.setDescription((string)item["description"]);
+                            PreInstructionList.Add(newPreInstruction);
+                        }
                     }
                     preInstructionView.ItemsSource = PreInstructionList;
                 }
