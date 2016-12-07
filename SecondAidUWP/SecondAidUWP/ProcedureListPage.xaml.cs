@@ -149,10 +149,8 @@ namespace SecondAidUWP
                         }*/
 
                     }// outer foreach END
-
-
+                    
                     scheduleView.ItemsSource = schedules;
-
                     
                     TextBlock clinicNameTextBlock = new TextBlock();
                     TextBlock phoneNumberTextBlock = new TextBlock();
