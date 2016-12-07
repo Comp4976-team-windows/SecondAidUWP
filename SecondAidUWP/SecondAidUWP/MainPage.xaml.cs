@@ -43,6 +43,7 @@ namespace SecondAidUWP
         {
             var name = UserNameTextBox.Text;
             var password = PasswordTextBox.Password;
+            var clinicId = ClinicIdTextBox.Text;
             var url = Config.connectTokenUrl;
             
             //Set parameters for http request
@@ -50,6 +51,7 @@ namespace SecondAidUWP
             {
                 new KeyValuePair<string, string>("username", name),
                 new KeyValuePair<string, string>("password", password),
+                new KeyValuePair<string, string>("clinic_id", clinicId),
                 new KeyValuePair<string, string>("grant_type", "password")
             };
 
@@ -82,6 +84,7 @@ namespace SecondAidUWP
                     else
                     {
                         Data.userToken = data.access_token;
+                        Data.clinicId = Convert.ToInt32(ClinicIdTextBox.Text);
                         errorMessageText.Text = "";
 
                         //Go to ProcedureListPage

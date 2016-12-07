@@ -11,6 +11,8 @@ namespace SecondAidUWP.Model
         //Tokens
         public static string userToken = "";
 
+        public static int clinicId;
+
         //Lists
         public static List<Procedure> procedures = new List<Procedure>();
     }
