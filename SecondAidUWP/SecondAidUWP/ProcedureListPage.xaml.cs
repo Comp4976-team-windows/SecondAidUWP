@@ -191,6 +191,7 @@ namespace SecondAidUWP
         {
             Schedule obj = ((FrameworkElement)sender).DataContext as Schedule;
             Data.procedureId = obj.prodecure.procedureId;
+            Data.procedureIsCompleted = obj.isCompleted;
             this.Frame.Navigate(typeof(SubProceduresPage));
         }
     }

@@ -14,6 +14,7 @@ namespace SecondAidUWP.Model
         public static int clinicId;
 
         public static int procedureId;
+        public static bool procedureIsCompleted;
 
         public static int subProcedureId;
 

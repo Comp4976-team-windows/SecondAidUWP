@@ -97,7 +97,13 @@ namespace SecondAidUWP
         //Update the page
         public void populateQuestionnaire()
         {
-            if(questionnaire != null)
+            if (!Data.procedureIsCompleted)
+            {
+                questionnaireNameTextBlock.Text = questionnaire.getName();
+                questionNumberBox.Text = "";
+                questionTextBox.Text = "Questions will be available after procedure is completed.";
+            }
+            else if(questionnaire != null)
             {
                 if(questionnaire.questions.Count > 0)
                 {
@@ -114,12 +120,13 @@ namespace SecondAidUWP
                         answerTextBox.Text = questionnaire.questions[questionIndex - 1].getQuestionAnswer();
                     }
                 }
-                else
-                {
-                    questionnaireNameTextBlock.Text = questionnaire.getName();
-                    questionNumberBox.Text = "0 / 0";
-                    questionTextBox.Text = "There are no questions.";
-                }
+                
+            }
+            else
+            {
+                questionnaireNameTextBlock.Text = questionnaire.getName();
+                questionNumberBox.Text = "0 / 0";
+                questionTextBox.Text = "There are no questions available.";
             }
 
         }
