@@ -182,6 +182,7 @@ namespace SecondAidUWP
         private void MedicationButton_Click(object sender, RoutedEventArgs e)
         {
             Schedule obj = ((FrameworkElement)sender).DataContext as Schedule;
+            Data.procedureId = obj.prodecure.procedureId;
             Debug.WriteLine(obj.prodecure.procedureId);
             this.Frame.Navigate(typeof(MedicationPage));
         }

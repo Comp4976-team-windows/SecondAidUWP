@@ -53,7 +53,7 @@ namespace SecondAidUWP
                     request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/x-www-form-urlencoded"));
 
                     //Add Token
-                    //client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Data.userToken);
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Data.userToken);
 
                     //Grab json of token from server
                     HttpResponseMessage response = await client.SendAsync(request);

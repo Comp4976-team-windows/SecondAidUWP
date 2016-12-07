@@ -28,12 +28,12 @@ namespace SecondAidUWP
     public sealed partial class MedicationPage : Page
     {
         private List<Medication> MedicationList = new List<Medication>();
+        private List<int> validMedIds = new List<int>();
 
         public MedicationPage()
         {
             this.InitializeComponent();
-            getMedication();
-            UpdateLayout();
+            getPatientProcedures();
         }
 
         public async void getMedication()
@@ -76,29 +76,79 @@ namespace SecondAidUWP
 
                     foreach (JObject item in data)
                     {
-                        Medication newMed = new Medication();
-                        newMed.setMedicationId((int)item["medicationId"]);
-                        newMed.setName((string)item["name"]);
-                        newMed.setDescription((string)item["description"]);
+
+                        if(validMedIds.Contains((int) item["medicationId"]))
+                        {
+                            Medication newMed = new Medication();
+                            newMed.setMedicationId((int)item["medicationId"]);
+                            newMed.setName((string)item["name"]);
+                            newMed.setDescription((string)item["description"]);
+
                             foreach (JObject stuff in data2)
                             {
                                 if (((int)stuff["medicationId"] == newMed.getMedicationId()))
                                 {
                                     newMed.setMedInstruction((string)stuff["instruction"]);
-                                string test = newMed.getMedInstruction();
-                                Debug.WriteLine(test);
-                            }
+                                    string test = newMed.getMedInstruction();
+                                    Debug.WriteLine(test);
+                                }
                             }
                             MedicationList.Add(newMed);
                         }
-                        medicationView.ItemsSource = MedicationList;
                     }
+                    medicationView.ItemsSource = MedicationList;
+                    UpdateLayout();
+                }
             }
             catch (Exception ex)
             {
                 Debug.WriteLine("Error: " + ex);
             }
+        }
 
+        public async void getPatientProcedures()
+        {
+            Debug.WriteLine("Starting Get");
+
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    var request = new HttpRequestMessage()
+                    {
+                        RequestUri = new Uri(Config.patientProceduresUrl),
+                        Method = HttpMethod.Get
+                    };
+                    request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/x-www-form-urlencoded"));
+
+                    //Add Token
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Data.userToken);
+
+                    //Grab json of token from server
+                    HttpResponseMessage response = await client.SendAsync(request);
+                    var json = await response.Content.ReadAsStringAsync();
+                    Debug.WriteLine(json);
+
+                    //Parse json data
+                    dynamic data = JArray.Parse(json);
+
+                    foreach (JObject item in data)
+                    {
+                        Debug.WriteLine(item.ToString());
+
+                        if((int)item["procedureId"] == Data.procedureId)
+                        {
+                            validMedIds.Add((int)item["medicationId"]);
+                        }
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Error: " + ex);
+            }
+            getMedication();
         }
 
         private void backButton_Click(object sender, RoutedEventArgs e)
