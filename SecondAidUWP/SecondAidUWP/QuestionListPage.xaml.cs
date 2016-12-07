@@ -157,7 +157,7 @@ namespace SecondAidUWP
 
         private void doneButton_Click(object sender, RoutedEventArgs e)
         {
-            questionnaire.questions[questionIndex - 1].setQuestionAnswer(answerTextBox.Text);
+            //questionnaire.questions[questionIndex - 1].setQuestionAnswer(answerTextBox.Text);
             this.Frame.Navigate(typeof(SubProceduresPage));
         }
     }
