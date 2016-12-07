@@ -97,17 +97,31 @@ namespace SecondAidUWP
         //Update the page
         public void populateQuestionnaire()
         {
-            questionnaireNameTextBlock.Text = questionnaire.getName();
-            questionNumberBox.Text = "" + questionIndex + " / " + questionnaire.questions.Count;
-            questionTextBox.Text = questionnaire.questions[questionIndex - 1].getQuestionBody();
+            if(questionnaire != null)
+            {
+                if(questionnaire.questions.Count > 0)
+                {
+                    questionnaireNameTextBlock.Text = questionnaire.getName();
+                    questionNumberBox.Text = "" + questionIndex + " / " + questionnaire.questions.Count;
+                    questionTextBox.Text = questionnaire.questions[questionIndex - 1].getQuestionBody();
 
-            if(questionnaire.questions[questionIndex - 1].getQuestionAnswer() == null)
-            {
-                answerTextBox.Text = "";
-            }else
-            {
-                answerTextBox.Text = questionnaire.questions[questionIndex - 1].getQuestionAnswer();
+                    if (questionnaire.questions[questionIndex - 1].getQuestionAnswer() == null)
+                    {
+                        answerTextBox.Text = "";
+                    }
+                    else
+                    {
+                        answerTextBox.Text = questionnaire.questions[questionIndex - 1].getQuestionAnswer();
+                    }
+                }
+                else
+                {
+                    questionnaireNameTextBlock.Text = questionnaire.getName();
+                    questionNumberBox.Text = "0 / 0";
+                    questionTextBox.Text = "There are no questions.";
+                }
             }
+
         }
 
         //Previous Button
