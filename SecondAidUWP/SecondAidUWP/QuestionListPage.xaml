@@ -15,15 +15,36 @@
                 <GradientStop Color="LightGreen" Offset="2"/>
             </LinearGradientBrush>
         </Grid.Background>
-        <TextBlock x:Name="questionnaireNameTextBlock" HorizontalAlignment="Left" Margin="416,88,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="58" Width="490"/>
-        <TextBlock x:Name="questionNumberLabel" HorizontalAlignment="Left" Margin="416,151,0,0" TextWrapping="Wrap" Text="Question Number:" VerticalAlignment="Top" Height="42" Width="197"/>
-        <TextBox x:Name="questionNumberBox" HorizontalAlignment="Left" Margin="649,151,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="42" Width="80" IsReadOnly="True"/>
-        <TextBlock x:Name="questionLabel" HorizontalAlignment="Left" Margin="416,225,0,0" TextWrapping="Wrap" Text="Question:" VerticalAlignment="Top" Height="42" Width="197"/>
-        <TextBox x:Name="questionTextBox" HorizontalAlignment="Left" Height="201" Margin="416,272,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="490" IsReadOnly="True"/>
-        <TextBlock x:Name="answerLabel" HorizontalAlignment="Left" Margin="416,503,0,0" TextWrapping="Wrap" Text="Answer:" VerticalAlignment="Top" Height="42" Width="85"/>
-        <TextBox x:Name="answerTextBox" HorizontalAlignment="Left" Margin="501,503,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="32" Width="405"/>
-        <Button x:Name="previousButton" Content="Previous" HorizontalAlignment="Left" Margin="315,503,0,0" VerticalAlignment="Top" Click="previousButton_Click"/>
-        <Button x:Name="nextButton" Content="Next" HorizontalAlignment="Left" Margin="948,503,0,0" VerticalAlignment="Top" Height="32" Width="77" Click="nextButton_Click"/>
 
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel
+                    Grid.Row="1"
+                    Padding="50,0,50,0"
+                    Background="white"
+                    CornerRadius="15" Margin="250,50,250,50">
+
+            <TextBlock x:Name="questionnaireNameTextBlock" FontSize ="20" HorizontalAlignment="Center" Margin="20,20,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="60" />
+            <StackPanel Orientation="Horizontal">
+                <TextBlock x:Name="questionNumberLabel" FontSize ="20" HorizontalAlignment="Left" Margin="0,20,0,0" TextWrapping="Wrap" Text="Question Number:" VerticalAlignment="Top" Height="42" Width="197"/>
+                <TextBox x:Name="questionNumberBox" HorizontalAlignment="Left" Margin="0,15,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="42" Width="80" IsReadOnly="True"/>
+            </StackPanel>
+             <TextBlock x:Name="questionLabel" FontSize ="20" HorizontalAlignment="Left" Margin="0,20,0,0" TextWrapping="Wrap" Text="Question:" VerticalAlignment="Top" Height="42" Width="197"/>
+            <TextBox x:Name="questionTextBox" HorizontalAlignment="Left" Height="200" Margin="10,20,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" MinWidth="650" IsReadOnly="True"/>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock x:Name="answerLabel" FontSize ="20" HorizontalAlignment="Left" Margin="0,20,0,0" TextWrapping="Wrap" Text="Answer:" VerticalAlignment="Top" Height="42" Width="85"/>
+                <TextBox x:Name="answerTextBox" HorizontalAlignment="Left" Margin="0,20,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="32" MinWidth="500"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <Button x:Name="previousButton" Content="Previous" HorizontalAlignment="Left" Margin="180,20,0,20" VerticalAlignment="Top" Width ="80" Click="previousButton_Click"/>
+                <Button x:Name="doneButton" Content="Done" HorizontalAlignment="Center" Margin="40,20,0,20" VerticalAlignment="Top" Width ="80" Click="doneButton_Click"/>
+                <Button x:Name="nextButton" Content="Next" HorizontalAlignment="Right" Margin="40,20,0,20" VerticalAlignment="Top"  Width="80" Click="nextButton_Click"/>
+             </StackPanel>
+           
+        </StackPanel>
     </Grid>
 </Page>
