@@ -133,7 +133,7 @@ namespace SecondAidUWP
                             }
                         }// inner foreach END
 
-                        if (tempSchedule.isCompleted == false)
+                        if (tempSchedule.isCompleted == true)
                         {
                             // Add schedule to the List<Schedule>
                             schedules.Add(tempSchedule);

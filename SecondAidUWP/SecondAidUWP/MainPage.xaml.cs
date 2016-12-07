@@ -77,7 +77,7 @@ namespace SecondAidUWP
                     dynamic data = JObject.Parse(json);
 
                     //Save information from json or print error
-                    if (data.error == "invalid_grant")
+                    if (data.error != null)
                     {
                         errorMessageText.Text = data.error_description;
                     }
