@@ -47,7 +47,7 @@ namespace SecondAidUWP
                 {
                     var request = new HttpRequestMessage()
                     {
-                        RequestUri = new Uri(Config.questionnaireApiUrl + "1"),
+                        RequestUri = new Uri(Config.questionnaireApiUrl + Data.subProcedureId),
                         Method = HttpMethod.Get
                     };
                     request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/x-www-form-urlencoded"));
@@ -137,7 +137,7 @@ namespace SecondAidUWP
         private void doneButton_Click(object sender, RoutedEventArgs e)
         {
             questionnaire.questions[questionIndex - 1].setQuestionAnswer(answerTextBox.Text);
-            this.Frame.Navigate(typeof(MainPage));
+            this.Frame.Navigate(typeof(SubProceduresPage));
         }
     }
 

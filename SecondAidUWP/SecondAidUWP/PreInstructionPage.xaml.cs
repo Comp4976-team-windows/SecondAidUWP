@@ -80,7 +80,7 @@ namespace SecondAidUWP
 
         private void backButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(ProcedureListPage));
+            this.Frame.Navigate(typeof(SubProceduresPage));
         }
     }
 }
