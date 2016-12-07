@@ -84,6 +84,7 @@ namespace SecondAidUWP
                     else
                     {
                         Data.userToken = data.access_token;
+                        Data.clinicId = Convert.ToInt32(ClinicIdTextBox.Text);
                         errorMessageText.Text = "";
 
                         //Go to ProcedureListPage
